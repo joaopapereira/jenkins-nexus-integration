@@ -40,10 +40,18 @@ public class NexusIntegrationBuilderTest {
         HtmlForm form = j.createWebClient()
                 .getPage(p, "configure")
                 .getFormByName("config");
-        form.getInputByName("_.nexusNamespace").setValueAttribute("bamm");
+        form.getInputByName("_.nexusRepository").setValueAttribute("bamm");
+        form.getInputByName("_.nexusGroupId").setValueAttribute("g1");
+        form.getInputByName("_.nexusArtifactId").setValueAttribute("artifact");
+        form.getInputByName("_.nexusArtifactVersion").setValueAttribute("1.0.0");
+        form.getInputByName("_.nexusArtifactPackaging").setValueAttribute("jar");
         j.submit(form);
         NexusIntegrationBuilder after = p.getBuildersList().get(NexusIntegrationBuilder.class);
-        Assert.assertEquals("bamm", after.getNexusNamespace());
+        Assert.assertEquals("bamm", after.getNexusRepository());
+        Assert.assertEquals("g1", after.getNexusGroupId());
+        Assert.assertEquals("artifact", after.getNexusArtifactId());
+        Assert.assertEquals("1.0.0", after.getNexusArtifactVersion());
+        Assert.assertEquals("jar", after.getNexusArtifactPackaging());
     }
     @Test
     public void testMainConfiguration() throws Exception {

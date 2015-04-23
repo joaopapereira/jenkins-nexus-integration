@@ -60,7 +60,7 @@ import java.util.regex.Pattern;
 public class NexusIntegrationBuilder extends Builder {
     private static Logger log = Logger.getLogger( NexusIntegrationBuilder.class.getSimpleName() );
 
-    private final String namespace;
+    private final String repository;
     private final String groupId;
     private final String artifactId;
     private final String version;
@@ -68,10 +68,10 @@ public class NexusIntegrationBuilder extends Builder {
 
     // Fields in config.jelly must match the parameter names in the "DataBoundConstructor"
     @DataBoundConstructor
-    public NexusIntegrationBuilder(String nexusNamespace, String nexusGroupId,
+    public NexusIntegrationBuilder(String nexusRepository, String nexusGroupId,
                                    String nexusArtifactId, String nexusArtifactVersion, String nexusArtifactPackaging) {
 
-        this.namespace = nexusNamespace;
+        this.repository = nexusRepository;
         this.groupId = nexusGroupId;
         this.artifactId = nexusArtifactId;
         if(nexusArtifactVersion.length() == 0){
@@ -82,8 +82,8 @@ public class NexusIntegrationBuilder extends Builder {
         this.packaging = nexusArtifactPackaging;
     }
 
-    public String getNexusNamespace() {
-        return namespace;
+    public String getNexusRepository() {
+        return repository;
     }
     public String getNexusGroupId() {
         return groupId;
@@ -125,11 +125,12 @@ public class NexusIntegrationBuilder extends Builder {
         WebResource request = service.path("service").path("local").path("artifact")
                                     .path("maven")
                                     .path("content")
-                                    .queryParam("r", getNexusNamespace())
-                                    .queryParam("g", getNexusGroupId())
-                                    .queryParam("a", getNexusArtifactId())
-                                    .queryParam("v", version)
-                                    .queryParam("p", getNexusArtifactPackaging());
+                .queryParam("r", getNexusRepository())
+                .queryParam("g", getNexusGroupId())
+                .queryParam("a", getNexusArtifactId())
+                .queryParam("v", version)
+                .queryParam("p", getNexusArtifactPackaging());
+
         ClientResponse response = request.get(ClientResponse.class);
         if(response.getStatus() != 200){
 
