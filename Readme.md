@@ -1,1 +1,1 @@
-Simple plugin for Jenkins used to download
+Simple plugin for Jenkins used to download files from Nexus server
