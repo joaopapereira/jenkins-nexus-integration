@@ -10,7 +10,19 @@
     Creates a text field that shows the value of the "name" property.
     When submitted, it will be passed to the corresponding constructor parameter.
   -->
-  <f:entry title="Name" field="name">
+  <f:entry title="namespace" field="nexusNamespace">
+    <f:textbox />
+  </f:entry>
+  <f:entry title="groupId" field="nexusGroupId">
+    <f:textbox />
+  </f:entry>
+  <f:entry title="artifactId" field="nexusArtifactId">
+    <f:textbox />
+  </f:entry>
+  <f:entry title="version" field="nexusArtifactVersion">
+    <f:textbox />
+  </f:entry>
+  <f:entry title="packaging" field="nexusArtifactPackaging">
     <f:textbox />
   </f:entry>
 </j:jelly>
